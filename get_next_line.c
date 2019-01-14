@@ -6,33 +6,16 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/18 18:10:12 by pdemian           #+#    #+#             */
-/*   Updated: 2019/01/13 03:15:17 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/01/14 23:11:53 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static t_list			*fucking_lists(const int fd, t_list **file)
-{
-	t_list	*list;
-
-	list = *file;
-	while (list)
-	{
-		if ((int)list->content_size == fd)
-			return (list);
-		list = list->next;
-	}
-	list = ft_lstnew("\0", fd);
-	ft_lstadd(file, list);
-	list = *file;
-	return (list);
-}
-
 static char		*obrz(char *s)
 {
 	int		i;
-	char	*chlen;
+	char	*result;
 
 	i = 0;
 	if (s[i] == '\0' || s[i] == '\n')
@@ -40,51 +23,52 @@ static char		*obrz(char *s)
 	while (s[i] != '\n')
 	{
 		if (s[i] == '\0')
-			return ("\0");
+			return (s);
 		i++;
 	}
-	chlen = ft_strnew(i);
+	result = ft_strnew(i);
 	i = 0;
 	while (s[i] != '\n' && s[i])
 	{
-		chlen[i] = s[i];
+		result[i] = s[i];
 		i++;
 	}
-	return (chlen);
+	return (result);
 }
 
 int			get_next_line(const int fd, char **line)
 {
 	int				ret;
-	static	t_list	*tmp;
+	static	char	*tmp;
 	char			buff[BUFF_SIZE + 1];
-	t_list			*damn;
 	char			*str;
+//	static int				i = 0;
 
-	str = NULL;
 	if (!line || fd < 0 || read(fd, buff, 0) < 0)
 		return (-1);
-	damn = fucking_lists(fd, &tmp);		
+	tmp = (tmp) ? tmp : ft_strnew(1);
+	str = ft_strdup(tmp);
+	ft_strdel(&tmp);
 	while ((ret = read(fd, buff, BUFF_SIZE)))
 	{
 		buff[ret] = '\0';
-		str = damn->content;
-		CHECK((damn->content = ft_strjoin(str, buff)));
+/*		printf("--------------------------------------------%d\n", ++i);
+		system("leaks seems_it_works");
+		printf("LLLLLLLLLLLLLLLLLLLLLLLLL%s\n", str);
+*/		str = ft_strjoin(str, buff);
 		// ft_putendl("-------");
-		printf("--{%s}\n", damn->content);
+//		printf("--{%s}\n", damn->content);
 		// if (str)
 		// 	free(str);
-		// ft_putendl("++++++");
+//		ft_putendl("++++++");
 		if ((strchr(buff, '\n')))
 			break ;
 	}
-	if (ret < BUFF_SIZE && !ft_strlen(damn->content))
-	{
-		ft_strdel(damn->content);
+	if (ret < BUFF_SIZE && !ft_strlen(str))
 		return(0);
-	}
 	free(*line);
-	*line = obrz(damn->content);
-	damn->content = ft_strchr(damn->content, '\n') + 1;
+	*line = (str[0] == '\n') ? ft_strnew(1) :  obrz(str);
+	tmp = ft_strdup(ft_strchr(str, '\n'));
+	ft_strdel(&str);
 	return (1);
 }

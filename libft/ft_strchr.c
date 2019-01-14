@@ -6,7 +6,7 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 12:37:02 by pdemian           #+#    #+#             */
-/*   Updated: 2018/10/29 13:12:41 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/01/14 22:08:46 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@ char	*ft_strchr(const char *s, int c)
 	while (*str)
 	{
 		if (*str == (char)c)
-			return (str);
+		{
+			if (*str + 1 == '\0')
+				return(0);
+			else
+				return (++str);
+		}
 		str++;
 	}
 	if ((char)c == *str)

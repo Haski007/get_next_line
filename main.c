@@ -6,7 +6,7 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 17:18:08 by pdemian           #+#    #+#             */
-/*   Updated: 2019/01/13 04:23:58 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/01/14 22:51:05 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		main(int ac, char **av)
 	int				i;
 
 	ac = 2;
-	line = ft_strnew(0);
+	line = ft_strnew(1);
 	i = 1;
 	if (!(fd = open(av[1], O_RDONLY)))
 		printf("%s\n", "It wasn't, kurwa, OPENED!!!");

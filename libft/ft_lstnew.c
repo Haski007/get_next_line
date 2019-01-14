@@ -6,7 +6,7 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 20:36:17 by pdemian           #+#    #+#             */
-/*   Updated: 2018/11/07 17:17:34 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/01/13 02:21:03 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 	if (!content)
 	{
 		list->content = NULL;
-		list->content_size = 0;
+		list->content_size = content_size;
 	}
 	else
 	{

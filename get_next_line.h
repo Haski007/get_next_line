@@ -6,7 +6,7 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/18 18:19:18 by pdemian           #+#    #+#             */
-/*   Updated: 2019/01/13 04:35:24 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/01/14 21:41:41 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-# define BUFF_SIZE 80
+# define BUFF_SIZE 31
 
 
 # define CHECK(a) if (!a) return (-1);
