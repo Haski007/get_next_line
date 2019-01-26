@@ -6,7 +6,7 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 12:37:02 by pdemian           #+#    #+#             */
-/*   Updated: 2019/01/14 22:08:46 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/01/26 18:56:20 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strchr(const char *s, int c)
 		if (*str == (char)c)
 		{
 			if (*str + 1 == '\0')
-				return(0);
+				return (0);
 			else
 				return (++str);
 		}
