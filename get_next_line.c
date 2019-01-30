@@ -6,13 +6,13 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/18 18:10:12 by pdemian           #+#    #+#             */
-/*   Updated: 2019/01/26 20:03:40 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/01/29 18:31:58 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static t_list		*give_my_list(const int fd, t_list **main)
+static t_list		*giveme_my_list(const int fd, t_list **main)
 {
 	t_list	*list;
 
@@ -28,43 +28,43 @@ static t_list		*give_my_list(const int fd, t_list **main)
 	return (list);
 }
 
-static int			line_copy(char **line, char *from_list)
+static int			make_it_for_me(char **line, char *list_content)
 {
 	int		i;
 	int		j;
-	char	*tmp;
+	char	*rabbit;
 
 	i = 0;
 	j = 0;
-	tmp = *line;
-	while (from_list[i] && from_list[i] != '\n')
+	rabbit = *line;
+	while (list_content[i] && list_content[i] != '\n')
 		i++;
-	if (!(tmp = ft_strnew(i)))
+	if (!(rabbit = ft_strnew(i)))
 		return (0);
-	while (from_list[j] && j < i)
+	while (list_content[j] && j < i)
 	{
-		tmp[j] = from_list[j];
+		rabbit[j] = list_content[j];
 		j++;
 	}
-	if (!(*line = tmp))
+	if (!(*line = rabbit))
 		return (0);
 	return (i);
 }
 
-int					read_this_fucking_file(const int fd, char **str)
+static int			read_this_ducking_file(const int fd, char **tmp)
 {
 	int		ret;
 	char	buff[BUFF_SIZE + 1];
-	char	*tmp;
+	char	*str;
 
 	if ((read(fd, buff, 0) < 0))
 		return (-1);
 	while ((ret = read(fd, buff, BUFF_SIZE)))
 	{
 		buff[ret] = '\0';
-		tmp = *str;
-		*str = ft_strjoin(tmp, buff);
-		free(tmp);
+		str = *tmp;
+		*tmp = ft_strjoin(str, buff);
+		free(str);
 		if (ft_strchr(buff, '\n'))
 			return (ret);
 	}
@@ -80,16 +80,15 @@ int					get_next_line(const int fd, char **line)
 
 	if (line == NULL || fd < 0)
 		return (-1);
-	work = give_my_list(fd, &please);
+	work = giveme_my_list(fd, &please);
 	tmp = work->content;
-	if ((ret = read_this_fucking_file(fd, &tmp)) < 0)
+	if ((ret = read_this_ducking_file(fd, &tmp)) < 0)
 		return (-1);
-	work->content = tmp;
-	if (ret < BUFF_SIZE && !ft_strlen(tmp))
+	if (!ft_strlen(tmp))
 		return (0);
-	ret = line_copy(line, work->content);
-	tmp = work->content;
-	if (tmp[ret] != '\0')
+	ret = make_it_for_me(line, tmp);
+	work->content = tmp;
+	if (tmp[ret])
 	{
 		work->content = ft_strdup(ft_strchr(tmp, '\n'));
 		free(tmp);
