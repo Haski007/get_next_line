@@ -6,7 +6,7 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/18 18:10:12 by pdemian           #+#    #+#             */
-/*   Updated: 2019/01/29 18:32:57 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/02/05 19:00:30 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <fcntl.h>
+# include <limits.h>
 
-# define BUFF_SIZE 1
+# define BUFF_SIZE 32
 
 int			get_next_line(const int fd, char **line);
 

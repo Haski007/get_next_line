@@ -6,7 +6,7 @@
 /*   By: pdemian <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/18 18:10:12 by pdemian           #+#    #+#             */
-/*   Updated: 2019/01/29 18:31:58 by pdemian          ###   ########.fr       */
+/*   Updated: 2019/02/05 19:13:00 by pdemian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int					get_next_line(const int fd, char **line)
 	t_list			*work;
 	char			*tmp;
 
-	if (line == NULL || fd < 0)
+	if (line == NULL || fd < 0 || fd > OPEN_MAX)
 		return (-1);
 	work = giveme_my_list(fd, &please);
 	tmp = work->content;
